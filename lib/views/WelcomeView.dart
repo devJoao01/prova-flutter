@@ -7,36 +7,51 @@ void main() {
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
+      title: 'Prova',
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
+      home: const WelcomeView(),
     );
   }
 }
 
-class MyHomePage extends StatefulWidget {
-  @override
-  State<MyHomePage> createState() => _MyHomePageState();
-}
+class WelcomeView extends StatelessWidget {
+  const WelcomeView({super.key});
 
-class _MyHomePageState extends State<MyHomePage> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        title: Text('Tela Inicial'),
         backgroundColor: Theme.of(context).colorScheme.inversePrimary,
       ),
+      drawer: Drawer(
+          child: Column(
+        children: [
+          UserAccountsDrawerHeader(
+              accountName: Text('Joao', style: TextStyle(fontSize: 24)),
+              accountEmail: Text('jv@email.com'),
+              currentAccountPicture: CircleAvatar(
+                  backgroundColor: Colors.white, child: Icon(Icons.person))),
+          ListTile(
+            leading: Icon(Icons.exit_to_app),
+            title: Text('Sair'),
+            onTap: () {
+              Navigator.pushNamed(context, '/main');
+            },
+          )
+        ],
+      )),
       body: Center(
         child: Text(
-          'Bem vindo a tela inicial!!',
+          'Bem-vindo à tela inicial!!',
           style: TextStyle(fontSize: 32.0),
           textAlign: TextAlign.center,
-          selectionColor: Colors.red,
         ),
       ),
     );
